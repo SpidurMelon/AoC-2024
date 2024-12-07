@@ -44,7 +44,7 @@ fun determineOperators(numbers: List<Long>, target: Long, operators: String): Li
                 return plusHeadOperators + listOf('+')
             }
         }
-        
+
         if ('|' in operators && target.endsWith(numbers.last())) {
             val concTarget: Long = target.toString().removeSuffix(numbers.last().toString()).toLongOrNull() ?: return null
             val concHeadOperators = determineOperators(numbers.dropLast(1), concTarget, operators)
