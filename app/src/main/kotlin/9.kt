@@ -2,7 +2,7 @@ import java.io.File
 import java.util.*
 import kotlin.collections.HashMap
 
-class FileSystem(private val numbers: List<Int>) {
+private class FileSystem(private val numbers: List<Int>) {
     data class File(val id: Int, val size: Int) {
         override fun toString(): String {
             return id.toString().repeat(size)
