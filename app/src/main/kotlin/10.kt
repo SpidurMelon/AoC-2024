@@ -1,11 +1,11 @@
 import java.awt.Point
 import java.io.File
 
-val lines: List<String> = File("res/10.txt").readLines()
-fun getHeight(x: Int, y: Int): Int? {
+private val lines: List<String> = File("res/10.txt").readLines()
+private fun getHeight(x: Int, y: Int): Int? {
     return lines.getOrNull(y)?.getOrNull(x)?.digitToInt()
 }
-fun walk(x: Int, y: Int): List<Point> {
+private fun walk(x: Int, y: Int): List<Point> {
     val currentHeight: Int = getHeight(x, y)?: return listOf()
     if (currentHeight == 9) return listOf(Point(x, y))
 
