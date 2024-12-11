@@ -1,7 +1,10 @@
 import java.io.File
 
+private var blinkCalls = 0
+
 // Common function
 fun Long.blink(): List<Long> {
+    blinkCalls += 1
     if (this == 0L) return listOf(1)
 
     val s = this.toString()
@@ -55,15 +58,48 @@ fun MutableMap<Long, Long>.blinks(count: Int): MutableMap<Long, Long> {
     return result
 }
 
+// Part 2 functions (Memoisation based)
+data class MemoState(val value: Long, val count: Int)
+val memory: HashMap<MemoState, Long> = hashMapOf()
+fun Long.blinksMemo(count: Int): Long {
+    val memoState = MemoState(this, count)
+    if (memoState in memory) return memory[memoState]!!
+
+    val result: Long
+    if (count == 1) result = this.blink().size.toLong()
+    else result = this.blink().sumOf { it.blinksMemo(count-1) }
+
+    memory[memoState] = result
+    return result
+}
+
+fun List<Long>.blinksMemo(count: Int): Long {
+    var result = 0L
+    for (l in this) {
+        result += l.blinksMemo(count)
+    }
+    return result
+}
 
 fun main() {
     val numbers = File("res/11.txt").readText().split(" ").map { it.toLong() }
+    // Part 1 using lists
+    blinkCalls = 0
     println(numbers.blinks(25).size)
+    println("blink() called $blinkCalls times for part 1")
 
+    // Part 2 using grouping
     val counts = mutableMapOf<Long, Long>()
     numbers.forEach {
         counts.putIfAbsent(it, 0)
         counts[it] = counts[it]!! + 1
     }
+    blinkCalls = 0
     println(counts.blinks(75).values.sum())
+    println("blink() called $blinkCalls times for part 2 (using grouping)")
+
+    // Part 2 using memoisation
+    blinkCalls = 0
+    println(numbers.blinksMemo(75))
+    println("blink() called $blinkCalls times for part 2 (using memoisation)")
 }
