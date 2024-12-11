@@ -86,7 +86,7 @@ fun main() {
     // Part 1 using lists
     blinkCalls = 0
     println(numbers.blinks(25).size)
-    println("blink() called $blinkCalls times for part 1")
+    println("blink() called $blinkCalls times for part 1 (using lists)")
 
     // Part 2 using grouping
     val counts = mutableMapOf<Long, Long>()
