@@ -1,0 +1,15 @@
+{
+    "configurations": [
+
+        {
+            "name": "Build AOC24",
+            "type": "gradle",
+            "workingDir": "C:\\Users\\JULIA\\Documents\\AOC24",
+            "tasks": [":app:classes"],
+            "initScripts": {
+                "flmapper": "ext.mapPath = { path -> path }",
+                "Build AOC24": "System.setProperty('org.gradle.java.compile-classpath-packaging', 'true')"
+            }
+        },
+    ]
+}
