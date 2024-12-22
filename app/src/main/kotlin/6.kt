@@ -5,22 +5,6 @@ enum class Tile {
     EMPTY, OBSTACLE, OUTSIDE
 }
 
-enum class Direction(val x: Int, val y: Int) {
-    UP(0, -1),
-    RIGHT(1, 0),
-    DOWN(0, 1),
-    LEFT(-1, 0);
-
-    fun rotated(): Direction {
-        return when (this) {
-            UP -> RIGHT
-            RIGHT -> DOWN
-            DOWN -> LEFT
-            LEFT -> UP
-        }
-    }
-}
-
 data class State(val pos: Point, val direction: Direction) {
     fun advanced(): State {
         return State(pos.moved(direction), direction)

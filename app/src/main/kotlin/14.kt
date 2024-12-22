@@ -2,14 +2,6 @@ import java.awt.Point
 import java.io.File
 import kotlin.math.max
 
-operator fun Point.plus(other: Point): Point {
-    return Point(this.x + other.x, this.y + other.y)
-}
-
-operator fun Point.rem(other: Point): Point {
-    return Point(((this.x % other.x)+other.x)%other.x, ((this.y % other.y)+other.y)%other.y)
-}
-
 class Bathroom(lines: List<String>, val bounds: Point) {
     data class Robot(var p: Point, val v: Point) {
         fun step(bounds: Point) {
